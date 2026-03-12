@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDN Financials - Indonesia Stock Exchange Platform</title>
+  <link rel="shortcut icon" href="https://www.idnfinancials.com/favicon.ico?a=1"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --primary: #1e3a8a;    /* biru finansial */
+      --accent: #f59e0b;     /* oranye emas */
+      --dark: #111827;
+      --light: #f9fafb;
+      --success: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    header {
+      background: #f9fafc;
+      color: #000000;
+      padding: 12px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, #ffffff, #ffffff);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+      color: var(--dark);
+    }
+    /* Ganti dengan logo resmi IDN Financials */
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .site-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .site-tagline {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      font-size: 14px;
+    }
+    nav a { padding: 6px 0; border-bottom: 2px solid transparent; }
+    nav a:hover { border-color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      padding: 40px 5%;
+      background: linear-gradient(135deg, var(--primary), #3b82f6);
+      color: #fff;
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 32px;
+      align-items: start;
+    }
+    .hero-text h1 {
+      font-size: 32px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .hero-text p {
+      font-size: 16px;
+      margin-bottom: 20px;
+      max-width: 480px;
+    }
+    .search-bar {
+      display: flex;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+    }
+    .search-bar input::placeholder { color: rgba(255,255,255,0.7); }
+    .search-bar button {
+      padding: 12px 20px;
+      background: var(--accent);
+      border: none;
+      color: var(--dark);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .market-quick {
+      background: rgba(0,0,0,0.2);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 13px;
+    }
+    .market-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .market-change.positive { color: var(--success); }
+    .market-change.negative { color: #ef4444; }
+
+    /* FITUR UTAMA */
+    .section {
+      padding: 40px 5%;
+    }
+    .section h2 {
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .section p.subtitle {
+      font-size: 14px;
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .feature-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .feature-box:hover { transform: translateY(-4px); }
+    .feature-box i {
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .feature-box h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    /* BERITA & PERUSAHAAN */
+    .news-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+    .news-item, .company-item {
+      background: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .news-thumb {
+      height: 140px;
+      background: linear-gradient(45deg, var(--primary), #60a5fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 48px;
+    }
+    .news-content {
+      padding: 16px;
+    }
+    .news-date {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .news-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .company-item {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .company-symbol {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+    .company-price {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .company-change {
+      font-size: 14px;
+    }
+    .company-change.positive { color: var(--success); }
+    .company-change.negative { color: #ef4444; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #9ca3af;
+      padding: 24px 5%;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hero-text h1 { font-size: 24px; }
+      nav ul { gap: 12px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo-wrap">
+      <div class="logo">
+        <p><img src="https://www.idnfinancials.com/assets/img/logo.svg" alt="IDN Financials Logo Vector" width="600" height="600"/>
+      </div>
+      <div>
+        <div class="site-title">IDN Financials</div>
+        <div class="site-tagline">Indonesia Stock Exchange Platform</div>
+      </div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Saham</a></li>
+        <li><a href="#">Perusahaan</a></li>
+        <li><a href="#">Berita</a></li>
+        <li><a href="#">Analisis</a></li>
+        <li><a href="#">Pricing</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Akses Data & Berita Pasar Modal Indonesia</h1>
+        <p>
+          Platform lengkap untuk investor dan analis: harga saham real-time, laporan keuangan,
+          berita IDX, analisis mendalam, dan tools investasi.
+        </p>
+        <div class="search-bar">
+          <input type="search" placeholder="Cari saham, perusahaan, atau berita (contoh: BBCA, BBRI)" />
+          <button><i class="fa-solid fa-magnifying-glass"></i> Cari</button>
+        </div>
+      </div>
+      <div class="market-quick">
+        <div class="market-item">
+          <span>IDX Composite</span>
+          <span>7,456.23 <span class="market-change positive">+1.2%</span></span>
+        </div>
+        <div class="market-item">
+          <span>Net Foreign Buy</span>
+          <span>Rp 1.2T <span class="market-change positive">+15%</span></span>
+        </div>
+        <div class="market-item">
+          <span>Volume Tertinggi</span>
+          <span>BBCA <span class="market-change positive">+2.5%</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FITUR UTAMA -->
+  <section class="section">
+    <h2>Fitur Unggulan</h2>
+    <p class="subtitle">Semua yang Anda butuhkan untuk analisis pasar modal Indonesia.</p>
+    <div class="features-grid">
+      <div class="feature-box">
+        <i class="fa-solid fa-chart-line"></i>
+        <h3>Harga Saham Real-Time</h3>
+        <p>Update harga, volume, dan perubahan terkini dari BEI/IDX.</p>
+      </div>
+      <div class="feature-box">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+        <h3>Laporan Keuangan</h3>
+        <p>Rasio keuangan, neraca, laba rugi perusahaan publik lengkap.</p>
+      </div>
+      <div class="feature-box">
+        <i class="fa-solid fa-newspaper"></i>
+        <h3>Berita & Publik Expose</h3>
+        <p>Update terkini saham, korporasi, ekonomi, dan RUPS.</p>
+      </div>
+      <div class="feature-box">
+        <i class="fa-solid fa-magnifying-glass-chart"></i>
+        <h3>Analisis & Tools</h3>
+        <p>Screening saham, valuasi, dan insights pasar modal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BERITA TERKINI & SAHAM POPULER -->
+  <section class="section">
+    <div class="news-grid">
+      <div class="news-item">
+        <div class="news-thumb">
+          <i class="fa-solid fa-chart-column"></i>
+        </div>
+        <div class="news-content">
+          <div class="news-date">12 Maret 2026</div>
+          <div class="news-title">BBCA Umumkan Dividen Interim Rp 250/saham, Yield 2.8%</div>
+          <p>Bank Central Asia (BBCA) merilis publik expose dividen interim...</p>
+        </div>
+      </div>
+      <div class="news-item">
+        <div class="news-thumb">
+          <i class="fa-solid fa-building-columns"></i>
+        </div>
+        <div class="news-content">
+          <div class="news-date">11 Maret 2026</div>
+          <div class="news-title">TLKM Targetkan Capex Rp 18T di 2026 untuk Ekspansi 5G</div>
+          <p>Telkom Indonesia (TLKM) rencanakan belanja modal...</p>
+        </div>
+      </div>
+      <div class="company-item">
+        <div class="company-symbol">BBRI</div>
+        <div>
+          <div class="company-price">Rp 5,120</div>
+          <div class="company-change positive">+1.8% <i class="fa-solid fa-arrow-up"></i></div>
+        </div>
+      </div>
+      <div class="company-item">
+        <div class="company-symbol">ASII</div>
+        <div>
+          <div class="company-price">Rp 4,850</div>
+          <div class="company-change negative">-0.5% <i class="fa-solid fa-arrow-down"></i></div>
+        </div>
+      </div>
+      <div class="company-item">
+        <div class="company-symbol">UNVR</div>
+        <div>
+          <div class="company-price">Rp 3,210</div>
+          <div class="company-change positive">+2.1% <i class="fa-solid fa-arrow-up"></i></div>
+        </div>
+      </div>
+      <div class="company-item">
+        <div class="company-symbol">GOTO</div>
+        <div>
+          <div class="company-price">Rp 148</div>
+          <div class="company-change negative">-1.3% <i class="fa-solid fa-arrow-down"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 IDN Financials. Platform data dan berita Indonesia Stock Exchange. <a href="#">info@idnfinancials.com</a></p>
+  </footer>
+
+</body>
+</html>
